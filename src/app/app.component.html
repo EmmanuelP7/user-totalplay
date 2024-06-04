@@ -1,0 +1,36 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a
+        class="nav-item nav-link"
+        [ngClass]="{ active: activeNav == 'registros' }"
+        href="#"
+        (click)="changeActiveNav('registros')"
+        >REGISTROS
+        <span *ngIf="activeNav == 'registros'" class="sr-only"
+          >(current)</span
+        ></a
+      >
+      <a
+        class="nav-item nav-link"
+        [ngClass]="{ active: activeNav == 'registrar' }"
+        href="#"
+        (click)="changeActiveNav('registrar')"
+        >Registrar
+        <span *ngIf="activeNav == 'registrar'" class="sr-only"
+          >(current)</span
+        ></a
+      >
+    </div>
+  </div>
+</nav>
+<div class="container text-center" *ngIf="activeNav == 'registros'">
+  <app-users-list></app-users-list>
+</div>
+<div class="container text-center" *ngIf="activeNav == 'registrar'">
+  <app-formulario></app-formulario>
+</div> -->
+
+<!-- <app-formulario></app-formulario> -->
+<app-users-list></app-users-list>
+<!-- <app-form-update></app-form-update> -->

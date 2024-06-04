@@ -1,0 +1,113 @@
+<div *ngIf="showUsers" class="container">
+  <div *ngIf="allUsers.length > 0; else noUsers">
+    <div
+      *ngIf="showConfirmation"
+      class="alert alert-warning text-center alertUser"
+      role="alert"
+    >
+      <h6>¿Estas seguro de eliminar este registro?</h6>
+      <h6>Empleado</h6>
+      <h6>
+        {{ usuarioNombre }} {{ usuarioApPaterno }}
+        {{ usuarioApMaterno }}
+      </h6>
+      <div style="display: flex; justify-content: space-around">
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="delete(usuarioUserId)"
+        >
+          Borrar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="
+            toggleConfirmation(
+              usuarioNombre,
+              usuarioApPaterno,
+              usuarioApMaterno,
+              usuarioUserId
+            )
+          "
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="showConfirmationResponse"
+      class="alert alert-success text-center alertUser"
+      role="alert"
+    >
+      <h6>{{ MessageConfirmationResponse }}</h6>
+
+      <div style="display: flex; justify-content: space-around">
+        <button type="button" class="btn btn-outline-dark" (click)="recargar()">
+          Aceptar
+        </button>
+      </div>
+    </div>
+    <div class="container text-center">
+      <h1>Empleados registrados</h1>
+    </div>
+    <table style="margin-top: 10px">
+      <thead>
+        <tr class="text-center">
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido Paerno</th>
+          <th>Apellido Materno</th>
+          <th>Telefono</th>
+          <th>Correo</th>
+          <th>Fecha de Ingreso</th>
+          <th>Sueldo</th>
+          <th>Descripcion de actividades</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let usuario of allUsers; let i = index" class="text-center">
+          <td>{{ usuario.userId }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apPaterno }}</td>
+          <td>{{ usuario.apMaterno }}</td>
+          <td>{{ usuario.telefono }}</td>
+          <td>{{ usuario.correo }}</td>
+          <td>
+            {{ usuario.fechaIngreso.replace("T00:00:00.000+00:00", "") }}
+          </td>
+          <td>{{ usuario.sueldo }}</td>
+          <td>{{ usuario.actividades }}</td>
+
+          <td>
+            <span class="edit" (click)="editar(usuario.noRegistro)">✏️</span>
+            <span
+              class="delete"
+              (click)="
+                toggleConfirmation(
+                  usuario.nombre,
+                  usuario.apPaterno,
+                  usuario.apMaterno,
+                  usuario.userId
+                )
+              "
+              >🗑️</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noUsers>
+    <div class="vacio text-center" style="padding-top: 50px">
+      <h1>Aun no hay empleados registrados</h1>
+    </div>
+  </ng-template>
+</div>
+
+<div *ngIf="!showUsers" class="container">
+  formulario de actualizacion
+  <app-form-update [user]="user"></app-form-update>
+</div>

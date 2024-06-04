@@ -1,0 +1,263 @@
+<div class="container">
+  <h1 class="text-center">Actualizar Datos</h1>
+
+  <div
+    *ngIf="showNotification"
+    class="alert text-center alertUser"
+    role="alert"
+    [ngClass]="notifactionType"
+  >
+    <pre>{{ notificationMessage }}</pre>
+    <h6 style="color: green">{{ notificationsEmail }}</h6>
+
+    <div style="display: flex; justify-content: space-around">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="closeNotification()"
+      >
+        Aceptar
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="formGroup">
+    <div class="text-center">
+      <div class="image-container">
+        <img
+          [src]="imageSrc"
+          class="porfile-image"
+          alt="Haz clic aquí para elegir una foto de perfil"
+          (click)="triggerFileInputClick()"
+        />
+      </div>
+      <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+
+      <input
+        type="file"
+        class="form-control"
+        id="exampleFormControlFile1"
+        (change)="onFileSelected($event)"
+        style="display: none"
+        formControlName="foto"
+      />
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              valid.status === 'invalid' && valid.campo === 'nombre',
+            'is-valid': valid.status === 'valid' && valid.campo === 'nombre',
+            '': valid.status === '' && valid.campo === 'nombre'
+          }"
+          id="validationServer01"
+          placeholder="Nombre"
+          oninput="this.value = this.value.toUpperCase()"
+          (input)="validar('nombre', this.formGroup.value.nombre ?? '')"
+          formControlName="nombre"
+          required
+        />
+        <div
+          *ngIf="valid.mensaje && valid.campo === 'nombre'"
+          [ngClass]="{
+            'invalid-feedback': valid.status === 'invalid' && valid.campo === 'nombre',
+            'valid-feedback': valid.status === 'valid' && valid.campo === 'nombre',
+          }"
+        >
+          {{ valid.mensaje }}
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="apellidoPaterno">Apellido Paterno</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              valid.status === 'invalid' && valid.campo === 'apellidoPaterno',
+            'is-valid':
+              valid.status === 'valid' && valid.campo === 'apellidoPaterno',
+            '': valid.status === '' && valid.campo === 'apellidoPaterno'
+          }"
+          placeholder="Apellido Paterno"
+          oninput="this.value = this.value.toUpperCase();"
+          (input)="
+            validar(
+              'apellidoPaterno',
+              this.formGroup.value.apellidoPaterno ?? ''
+            )
+          "
+          formControlName="apellidoPaterno"
+          required
+        />
+        <div
+          *ngIf="valid.mensaje && valid.campo === 'apellidoPaterno'"
+          [ngClass]="{
+            'invalid-feedback': valid.status === 'invalid' && valid.campo === 'apellidoPaterno',
+            'valid-feedback': valid.status === 'valid' && valid.campo === 'apellidoPaterno',
+          }"
+        >
+          {{ valid.mensaje }}
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="apellidoMaterno">Apellido Materno</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              valid.status === 'invalid' && valid.campo === 'apellidoMaterno',
+            'is-valid':
+              valid.status === 'valid' && valid.campo === 'apellidoMaterno',
+            '': valid.status === '' && valid.campo === 'apellidoMaterno'
+          }"
+          placeholder="Apellido Materno"
+          oninput="this.value = this.value.toUpperCase();"
+          (input)="
+            validar(
+              'apellidoMaterno',
+              this.formGroup.value.apellidoMaterno ?? ''
+            )
+          "
+          formControlName="apellidoMaterno"
+          required
+        />
+        <div
+          *ngIf="valid.mensaje && valid.campo === 'apellidoMaterno'"
+          [ngClass]="{
+            'invalid-feedback': valid.status === 'invalid' && valid.campo === 'apellidoMaterno',
+            'valid-feedback': valid.status === 'valid' && valid.campo === 'apellidoMaterno',
+          }"
+        >
+          {{ valid.mensaje }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="telefono">Telefono</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              valid.status === 'invalid' && valid.campo === 'telefono',
+            'is-valid': valid.status === 'valid' && valid.campo === 'telefono',
+            '': valid.status === '' && valid.campo === 'telefono'
+          }"
+          placeholder="Telefono"
+          oninput="this.value = this.value.toUpperCase();"
+          (input)="validar('telefono', this.formGroup.value.telefono ?? '')"
+          formControlName="telefono"
+          required
+        />
+        <div
+          *ngIf="valid.mensaje && valid.campo === 'telefono'"
+          [ngClass]="{
+          'invalid-feedback': valid.status === 'invalid' && valid.campo === 'telefono',
+          'valid-feedback': valid.status === 'valid' && valid.campo === 'telefono',
+        }"
+        >
+          {{ valid.mensaje }}
+        </div>
+      </div>
+      <div class="col">
+        <label for="sueldo">Sueldo</label>
+
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              valid.status === 'invalid' && valid.campo === 'sueldo',
+            'is-valid': valid.status === 'valid' && valid.campo === 'sueldo',
+            '': valid.status === '' && valid.campo === 'sueldo'
+          }"
+          placeholder="0.0"
+          (input)="validar('sueldo', this.formGroup.value.sueldo ?? '')"
+          formControlName="sueldo"
+          required
+        />
+        <div
+          *ngIf="valid.mensaje && valid.campo === 'sueldo'"
+          [ngClass]="{
+      'invalid-feedback': valid.status === 'invalid' && valid.campo === 'sueldo',
+      'valid-feedback': valid.status === 'valid' && valid.campo === 'sueldo',
+    }"
+        >
+          {{ valid.mensaje }}
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="fecha">Fecha de ingreso</label>
+        <input
+          type="date"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': valid.status === 'invalid' && valid.campo === 'fecha',
+            'is-valid': valid.status === 'valid' && valid.campo === 'fecha',
+            '': valid.status === '' && valid.campo === 'fecha'
+          }"
+          placeholder=""
+          formControlName="fecha"
+          (input)="validar('fecha', this.formGroup.value.fecha)"
+          required
+        />
+        <div
+          *ngIf="valid.mensaje && valid.campo === 'fecha'"
+          [ngClass]="{
+      'invalid-feedback': valid.status === 'invalid' && valid.campo === 'fecha',
+      'valid-feedback': valid.status === 'valid' && valid.campo === 'fecha',
+    }"
+        >
+          {{ valid.mensaje }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row text-center" style="margin-top: 10px">
+      <div class="col form-group">
+        <fieldset disabled>
+          <label for="">Correo:</label>
+          <output type="text" id="disabledTextInput">{{
+            formGroup.value.correo
+          }}</output>
+        </fieldset>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group">
+        <label for="actividades">Descripción de funciones</label>
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          formControlName="actividades"
+          required
+        ></textarea>
+      </div>
+
+      <div class="text-center" style="margin-top: 10px">
+        <button class="btn btn-primary" (click)="actualizar()">
+          ACTUALIZAR
+        </button>
+        <button
+          class="btn btn-primary"
+          style="margin-left: 50px"
+          (click)="cancelar()"
+        >
+          CANCELAR
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
